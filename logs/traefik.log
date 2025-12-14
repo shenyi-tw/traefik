@@ -1,0 +1,110 @@
+time="2025-12-14T01:33:26Z" level=info msg="Configuration loaded from flags."
+time="2025-12-14T01:33:26Z" level=info msg="Traefik version 2.10.7 built on 2023-12-06T15:54:59Z"
+time="2025-12-14T01:33:26Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"traefik\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}},\"web\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"http2\":{\"maxConcurrentStreams\":250},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}},\"api\":{\"insecure\":true,\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"format\":\"common\"},\"accessLog\":{\"format\":\"common\",\"filters\":{},\"fields\":{\"defaultMode\":\"keep\",\"headers\":{\"defaultMode\":\"drop\"}}}}"
+time="2025-12-14T01:33:26Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2025-12-14T01:33:26Z" level=info msg="Starting provider aggregator aggregator.ProviderAggregator"
+time="2025-12-14T01:33:26Z" level=debug msg="Starting TCP Server" entryPointName=web
+time="2025-12-14T01:33:26Z" level=debug msg="Starting TCP Server" entryPointName=traefik
+time="2025-12-14T01:33:26Z" level=info msg="Starting provider *traefik.Provider"
+time="2025-12-14T01:33:26Z" level=debug msg="*traefik.Provider provider configuration: {}"
+time="2025-12-14T01:33:26Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"api\":{\"entryPoints\":[\"traefik\"],\"service\":\"api@internal\",\"rule\":\"PathPrefix(`/api`)\",\"priority\":2147483646},\"dashboard\":{\"entryPoints\":[\"traefik\"],\"middlewares\":[\"dashboard_redirect@internal\",\"dashboard_stripprefix@internal\"],\"service\":\"dashboard@internal\",\"rule\":\"PathPrefix(`/`)\",\"priority\":2147483645}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"dashboard_redirect\":{\"redirectRegex\":{\"regex\":\"^(http:\\\\/\\\\/(\\\\[[\\\\w:.]+\\\\]|[\\\\w\\\\._-]+)(:\\\\d+)?)\\\\/$\",\"replacement\":\"${1}/dashboard/\",\"permanent\":true}},\"dashboard_stripprefix\":{\"stripPrefix\":{\"prefixes\":[\"/dashboard/\",\"/dashboard\"]}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"udp\":{},\"tls\":{}}" providerName=internal
+time="2025-12-14T01:33:26Z" level=info msg="Starting provider *acme.ChallengeTLSALPN"
+time="2025-12-14T01:33:26Z" level=debug msg="*acme.ChallengeTLSALPN provider configuration: {}"
+time="2025-12-14T01:33:26Z" level=info msg="Starting provider *docker.Provider"
+time="2025-12-14T01:33:26Z" level=debug msg="*docker.Provider provider configuration: {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2025-12-14T01:33:26Z" level=debug msg="Provider connection established with docker 28.3.2 (API 1.51)" providerName=docker
+time="2025-12-14T01:33:26Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware api@internal" routerName=api@internal middlewareName=tracing middlewareType=TracingForwarder entryPointName=traefik
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware dashboard@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=traefik routerName=dashboard@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" routerName=dashboard@internal middlewareName=dashboard_stripprefix@internal middlewareType=StripPrefix entryPointName=traefik
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" middlewareName=dashboard_stripprefix@internal entryPointName=traefik routerName=dashboard@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareName=dashboard_redirect@internal middlewareType=RedirectRegex entryPointName=traefik routerName=dashboard@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/" middlewareType=RedirectRegex entryPointName=traefik routerName=dashboard@internal middlewareName=dashboard_redirect@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" middlewareName=dashboard_redirect@internal entryPointName=traefik routerName=dashboard@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=traefik middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" container=auth-check-security-demo-go-b190368c23194916357e0f91ed5ca6ea7c73e4dd8dcbd271db12c73462518a12 providerName=docker
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" container=traefik-security-demo-go-dfd223cf5852dcda47dcdca653c42bb46aec93c3eeb21eef1fc538fd54b99c92 providerName=docker
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" container=keycloak-postgresql-myjhipsterapp-f73485de0b8a9c7c80ef60ce0035dadc19ef6c43ac2b27bc79d933279966a372 providerName=docker
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" providerName=docker container=postgresql-myjhipsterapp-055de137b15973bb9a830ad1d66eb544c4b549272a1a995a56d09462e91394f9
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" providerName=docker container=consul-docker-13f2e1bcd3e3374d97473332b5b8df320858f899baa66b2834f9cb4ed1ce4dbe
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" container=consul-config-loader-docker-c1f336472a4472375d383626b9c3ac143e760c9bef8ce9b2a1a6ebddbf5eebd1 providerName=docker
+time="2025-12-14T01:33:26Z" level=debug msg="Filtering disabled container" providerName=docker container=redis-redis-a1240dd80693e6b16c84386733b0b8c1a929a7cf5084df503535b611976eba36
+time="2025-12-14T01:33:26Z" level=debug msg="Configuration received: {\"http\":{\"routers\":{\"blog-app\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"auth-forwarder\",\"cors-for-other-apis\"],\"service\":\"blog-app-lb\",\"rule\":\"PathPrefix(`/api/blog`)\",\"priority\":100},\"go-auth-options\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"cors-for-other-apis\"],\"service\":\"auth-lb\",\"rule\":\"Method(`OPTIONS`)\",\"priority\":101},\"go-auth-protected\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"auth-forwarder\",\"cors-for-other-apis\"],\"service\":\"auth-lb\",\"rule\":\"PathPrefix(`/api/s2`) || PathPrefix(`/api/user`)\",\"priority\":99},\"go-auth-public\":{\"entryPoints\":[\"web\"],\"middlewares\":[\"cors-for-login\"],\"service\":\"auth-lb\",\"rule\":\"PathPrefix(`/api/auth`)\",\"priority\":100}},\"services\":{\"auth-lb\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.25.0.6:8080\"}],\"passHostHeader\":true}},\"blog-app-lb\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.20.0.2:8080\"}],\"passHostHeader\":true}}},\"middlewares\":{\"auth-forwarder\":{\"forwardAuth\":{\"address\":\"http://auth-check:8080/auth/check\",\"authResponseHeaders\":[\"X-User-Id\",\"X-User-Name\",\"X-User-Roles\"]}},\"cors-for-login\":{\"headers\":{\"accessControlAllowCredentials\":true,\"accessControlAllowHeaders\":[\"Authorization\",\"Content-Type\"],\"accessControlAllowMethods\":[\"POST\",\"OPTIONS\"],\"accessControlAllowOriginList\":[\"http://localhost:5173\"]}},\"cors-for-other-apis\":{\"headers\":{\"accessControlAllowCredentials\":true,\"accessControlAllowHeaders\":[\"Authorization\",\"Content-Type\"],\"accessControlAllowMethods\":[\"GET\",\"POST\",\"PUT\",\"DELETE\",\"OPTIONS\"],\"accessControlAllowOriginList\":[\"http://localhost:5173\"]}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2025-12-14T01:33:26Z" level=debug msg="No default certificate, fallback to the internal generated certificate" tlsStoreName=default
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware dashboard@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=traefik routerName=dashboard@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" routerName=dashboard@internal middlewareName=dashboard_stripprefix@internal middlewareType=StripPrefix entryPointName=traefik
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" routerName=dashboard@internal entryPointName=traefik middlewareName=dashboard_stripprefix@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareType=RedirectRegex entryPointName=traefik routerName=dashboard@internal middlewareName=dashboard_redirect@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/" middlewareType=RedirectRegex entryPointName=traefik routerName=dashboard@internal middlewareName=dashboard_redirect@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" middlewareName=dashboard_redirect@internal entryPointName=traefik routerName=dashboard@internal
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware api@internal" middlewareType=TracingForwarder routerName=api@internal entryPointName=traefik middlewareName=tracing
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareName=traefik-internal-recovery middlewareType=Recovery entryPointName=traefik
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=pipelining middlewareType=Pipelining routerName=go-auth-protected@docker serviceName=auth-lb
+time="2025-12-14T01:33:26Z" level=debug msg="Creating load-balancer" routerName=go-auth-protected@docker serviceName=auth-lb entryPointName=web
+time="2025-12-14T01:33:26Z" level=debug msg="Creating server 0 http://172.25.0.6:8080" serviceName=auth-lb entryPointName=web serverName=0 routerName=go-auth-protected@docker
+time="2025-12-14T01:33:26Z" level=debug msg="child http://172.25.0.6:8080 now UP"
+time="2025-12-14T01:33:26Z" level=debug msg="Propagating new UP status"
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware auth-lb" entryPointName=web routerName=go-auth-protected@docker middlewareName=tracing middlewareType=TracingForwarder
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=web routerName=go-auth-protected@docker middlewareName=cors-for-other-apis@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Setting up customHeaders/Cors from {map[] map[] true [Authorization Content-Type] [GET POST PUT DELETE OPTIONS] [http://localhost:5173] [] [] 0 false [] [] false false  map[] false 0 false false false false  false false       false}" entryPointName=web routerName=go-auth-protected@docker middlewareName=cors-for-other-apis@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=go-auth-protected@docker middlewareName=cors-for-other-apis@docker
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareType=ForwardedAuthType entryPointName=web routerName=go-auth-protected@docker middlewareName=auth-forwarder@docker
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareType=Pipelining entryPointName=web routerName=go-auth-public@docker serviceName=auth-lb middlewareName=pipelining
+time="2025-12-14T01:33:26Z" level=debug msg="Creating load-balancer" entryPointName=web routerName=go-auth-public@docker serviceName=auth-lb
+time="2025-12-14T01:33:26Z" level=debug msg="Creating server 0 http://172.25.0.6:8080" entryPointName=web routerName=go-auth-public@docker serviceName=auth-lb serverName=0
+time="2025-12-14T01:33:26Z" level=debug msg="child http://172.25.0.6:8080 now UP"
+time="2025-12-14T01:33:26Z" level=debug msg="Propagating new UP status"
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware auth-lb" entryPointName=web routerName=go-auth-public@docker middlewareName=tracing middlewareType=TracingForwarder
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=web routerName=go-auth-public@docker middlewareName=cors-for-login@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Setting up customHeaders/Cors from {map[] map[] true [Authorization Content-Type] [POST OPTIONS] [http://localhost:5173] [] [] 0 false [] [] false false  map[] false 0 false false false false  false false       false}" entryPointName=web routerName=go-auth-public@docker middlewareName=cors-for-login@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" entryPointName=web routerName=go-auth-public@docker middlewareName=cors-for-login@docker
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareName=pipelining middlewareType=Pipelining entryPointName=web routerName=blog-app@docker serviceName=blog-app-lb
+time="2025-12-14T01:33:26Z" level=debug msg="Creating load-balancer" routerName=blog-app@docker serviceName=blog-app-lb entryPointName=web
+time="2025-12-14T01:33:26Z" level=debug msg="Creating server 0 http://172.20.0.2:8080" serverName=0 entryPointName=web routerName=blog-app@docker serviceName=blog-app-lb
+time="2025-12-14T01:33:26Z" level=debug msg="child http://172.20.0.2:8080 now UP"
+time="2025-12-14T01:33:26Z" level=debug msg="Propagating new UP status"
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware blog-app-lb" entryPointName=web routerName=blog-app@docker middlewareName=tracing middlewareType=TracingForwarder
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=web routerName=blog-app@docker middlewareName=cors-for-other-apis@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Setting up customHeaders/Cors from {map[] map[] true [Authorization Content-Type] [GET POST PUT DELETE OPTIONS] [http://localhost:5173] [] [] 0 false [] [] false false  map[] false 0 false false false false  false false       false}" routerName=blog-app@docker middlewareName=cors-for-other-apis@docker middlewareType=Headers entryPointName=web
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" middlewareName=cors-for-other-apis@docker entryPointName=web routerName=blog-app@docker
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" routerName=blog-app@docker middlewareName=auth-forwarder@docker middlewareType=ForwardedAuthType entryPointName=web
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" middlewareType=Pipelining entryPointName=web routerName=go-auth-options@docker serviceName=auth-lb middlewareName=pipelining
+time="2025-12-14T01:33:26Z" level=debug msg="Creating load-balancer" entryPointName=web routerName=go-auth-options@docker serviceName=auth-lb
+time="2025-12-14T01:33:26Z" level=debug msg="Creating server 0 http://172.25.0.6:8080" entryPointName=web routerName=go-auth-options@docker serviceName=auth-lb serverName=0
+time="2025-12-14T01:33:26Z" level=debug msg="child http://172.25.0.6:8080 now UP"
+time="2025-12-14T01:33:26Z" level=debug msg="Propagating new UP status"
+time="2025-12-14T01:33:26Z" level=debug msg="Added outgoing tracing middleware auth-lb" entryPointName=web routerName=go-auth-options@docker middlewareName=tracing middlewareType=TracingForwarder
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=web routerName=go-auth-options@docker middlewareName=cors-for-other-apis@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Setting up customHeaders/Cors from {map[] map[] true [Authorization Content-Type] [GET POST PUT DELETE OPTIONS] [http://localhost:5173] [] [] 0 false [] [] false false  map[] false 0 false false false false  false false       false}" entryPointName=web routerName=go-auth-options@docker middlewareName=cors-for-other-apis@docker middlewareType=Headers
+time="2025-12-14T01:33:26Z" level=debug msg="Adding tracing to middleware" routerName=go-auth-options@docker middlewareName=cors-for-other-apis@docker entryPointName=web
+time="2025-12-14T01:33:26Z" level=debug msg="Creating middleware" entryPointName=web middlewareName=traefik-internal-recovery middlewareType=Recovery
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "OPTIONS /api/auth/login HTTP/1.1" 200 0 "-" "-" 1 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "POST /api/auth/login HTTP/1.1" 200 231 "-" "-" 2 "go-auth-public@docker" "http://172.25.0.6:8080" 62ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "OPTIONS /api/blog/posts?page=0&size=5 HTTP/1.1" 200 0 "-" "-" 3 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "OPTIONS /api/user/me HTTP/1.1" 200 0 "-" "-" 4 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "OPTIONS /api/s2/admin HTTP/1.1" 200 0 "-" "-" 5 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "OPTIONS /api/s2/user HTTP/1.1" 200 0 "-" "-" 6 "go-auth-options@docker" "-" 0ms
+time="2025-12-14T01:33:46Z" level=debug msg="Remote error http://auth-check:8080/auth/check. StatusCode: 403" middlewareName=auth-forwarder@docker middlewareType=ForwardedAuthType
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "GET /api/s2/admin HTTP/1.1" 403 33 "-" "-" 10 "go-auth-protected@docker" "-" 3ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "GET /api/blog/posts?page=0&size=5 HTTP/1.1" 200 1933 "-" "-" 7 "blog-app@docker" "http://172.20.0.2:8080" 6ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "GET /api/user/me HTTP/1.1" 200 27 "-" "-" 9 "go-auth-protected@docker" "http://172.25.0.6:8080" 5ms
+192.168.65.1 - - [14/Dec/2025:01:33:46 +0000] "GET /api/s2/user HTTP/1.1" 200 16 "-" "-" 8 "go-auth-protected@docker" "http://172.25.0.6:8080" 5ms
+192.168.65.1 - - [14/Dec/2025:01:33:57 +0000] "OPTIONS /api/blog/posts HTTP/1.1" 200 0 "-" "-" 11 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:57 +0000] "POST /api/blog/posts HTTP/1.1" 201 155 "-" "-" 12 "blog-app@docker" "http://172.20.0.2:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:33:57 +0000] "OPTIONS /api/blog/posts?page=0&size=5 HTTP/1.1" 200 0 "-" "-" 13 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:57 +0000] "GET /api/blog/posts?page=0&size=5 HTTP/1.1" 200 1716 "-" "-" 14 "blog-app@docker" "http://172.20.0.2:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:33:59 +0000] "OPTIONS /api/blog/posts/8 HTTP/1.1" 200 0 "-" "-" 15 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:33:59 +0000] "GET /api/blog/posts/8 HTTP/1.1" 200 153 "-" "-" 16 "blog-app@docker" "http://172.20.0.2:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:34:00 +0000] "OPTIONS /api/blog/comments/8/comments HTTP/1.1" 200 0 "-" "-" 17 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:34:00 +0000] "POST /api/blog/comments/8/comments HTTP/1.1" 201 44 "-" "-" 18 "blog-app@docker" "http://172.20.0.2:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:34:00 +0000] "OPTIONS /api/blog/posts/8 HTTP/1.1" 200 0 "-" "-" 19 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:34:00 +0000] "GET /api/blog/posts/8 HTTP/1.1" 200 291 "-" "-" 20 "blog-app@docker" "http://172.20.0.2:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "OPTIONS /api/s2/admin HTTP/1.1" 200 0 "-" "-" 23 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "OPTIONS /api/blog/posts?page=0&size=5 HTTP/1.1" 200 0 "-" "-" 21 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "OPTIONS /api/s2/user HTTP/1.1" 200 0 "-" "-" 22 "go-auth-options@docker" "-" 0ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "OPTIONS /api/user/me HTTP/1.1" 200 0 "-" "-" 24 "go-auth-options@docker" "-" 0ms
+time="2025-12-14T01:34:04Z" level=debug msg="Remote error http://auth-check:8080/auth/check. StatusCode: 403" middlewareName=auth-forwarder@docker middlewareType=ForwardedAuthType
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "GET /api/s2/admin HTTP/1.1" 403 33 "-" "-" 25 "go-auth-protected@docker" "-" 1ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "GET /api/user/me HTTP/1.1" 200 27 "-" "-" 27 "go-auth-protected@docker" "http://172.25.0.6:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "GET /api/s2/user HTTP/1.1" 200 16 "-" "-" 28 "go-auth-protected@docker" "http://172.25.0.6:8080" 1ms
+192.168.65.1 - - [14/Dec/2025:01:34:04 +0000] "GET /api/blog/posts?page=0&size=5 HTTP/1.1" 200 1854 "-" "-" 26 "blog-app@docker" "http://172.20.0.2:8080" 2ms

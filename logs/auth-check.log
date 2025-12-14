@@ -1,0 +1,55 @@
+2025/12/14 01:33:26 Starting ForwardAuth Service on :8080
+
+2025/12/14 01:33:46 Checking path: /api/blog/posts?page=0&size=5
+
+2025/12/14 01:33:46 Access granted for user admin (ROLE_ADMIN) to /api/blog/posts?page=0&size=5
+
+2025/12/14 01:33:46 Checking path: /api/user/me
+
+2025/12/14 01:33:46 Access granted for user admin (ROLE_ADMIN) to /api/user/me
+
+2025/12/14 01:33:46 Checking path: /api/s2/user
+
+2025/12/14 01:33:46 Access granted for user admin (ROLE_ADMIN) to /api/s2/user
+
+2025/12/14 01:33:46 Checking path: /api/s2/admin
+
+2025/12/14 01:33:46 Access denied: User admin does not have ADMIN role for /api/s2/admin
+
+2025/12/14 01:33:57 Checking path: /api/blog/posts
+
+2025/12/14 01:33:57 Access granted for user admin (ROLE_ADMIN) to /api/blog/posts
+
+2025/12/14 01:33:57 Checking path: /api/blog/posts?page=0&size=5
+
+2025/12/14 01:33:57 Access granted for user admin (ROLE_ADMIN) to /api/blog/posts?page=0&size=5
+
+2025/12/14 01:33:59 Checking path: /api/blog/posts/8
+
+2025/12/14 01:33:59 Access granted for user admin (ROLE_ADMIN) to /api/blog/posts/8
+
+2025/12/14 01:34:00 Checking path: /api/blog/comments/8/comments
+
+2025/12/14 01:34:00 Access granted for user admin (ROLE_ADMIN) to /api/blog/comments/8/comments
+
+2025/12/14 01:34:00 Checking path: /api/blog/posts/8
+
+2025/12/14 01:34:00 Access granted for user admin (ROLE_ADMIN) to /api/blog/posts/8
+
+2025/12/14 01:34:04 Checking path: /api/s2/admin
+
+2025/12/14 01:34:04 Access denied: User admin does not have ADMIN role for /api/s2/admin
+
+2025/12/14 01:34:04 Checking path: /api/blog/posts?page=0&size=5
+
+2025/12/14 01:34:04 Access granted for user admin (ROLE_ADMIN) to /api/blog/posts?page=0&size=5
+
+2025/12/14 01:34:04 Checking path: /api/user/me
+
+2025/12/14 01:34:04 Access granted for user admin (ROLE_ADMIN) to /api/user/me
+
+2025/12/14 01:34:04 Checking path: /api/s2/user
+
+2025/12/14 01:34:04 Access granted for user admin (ROLE_ADMIN) to /api/s2/user
+
+

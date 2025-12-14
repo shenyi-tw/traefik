@@ -1,0 +1,74 @@
+2025/12/14 01:33:26 No .env file found, relying on environment variables.
+
+2025/12/14 01:33:26 cfg.DBName demodb
+
+2025/12/14 01:33:26 Registered Routes:
+
+[POST] /api/auth/register
+
+[POST] /api/auth/login
+
+[echo_route_not_found] /api/s2
+
+[echo_route_not_found] /api/s2/*
+
+[GET] /api/s2/user
+
+[GET] /api/user/me
+
+[GET] /api/s2/admin
+
+[echo_route_not_found] /api/user
+
+[echo_route_not_found] /api/user/*
+
+2025/12/14 01:33:26 📝 [POST] /api/auth/register
+
+2025/12/14 01:33:26 📝 [POST] /api/auth/login
+
+2025/12/14 01:33:26 📝 [echo_route_not_found] /api/s2
+
+2025/12/14 01:33:26 📝 [echo_route_not_found] /api/s2/*
+
+2025/12/14 01:33:26 📝 [GET] /api/s2/user
+
+2025/12/14 01:33:26 📝 [GET] /api/user/me
+
+2025/12/14 01:33:26 📝 [GET] /api/s2/admin
+
+2025/12/14 01:33:26 📝 [echo_route_not_found] /api/user
+
+2025/12/14 01:33:26 📝 [echo_route_not_found] /api/user/*
+
+2025/12/14 01:33:26 ===================================================
+
+2025/12/14 01:33:26 📝 應用程式已註冊 9 個路由
+
+2025/12/14 01:33:26 ===================================================
+
+2025/12/14 01:33:26 Server starting on port 8080
+
+
+   ____    __
+
+  / __/___/ /  ___
+
+ / _// __/ _ \/ _ \
+
+/___/\__/_//_/\___/ v4.14.0
+
+High performance, minimalist Go web framework
+
+https://echo.labstack.com⁠
+
+____________________________________O/_______
+
+                                    O\
+
+⇨ http server started on [::]:8080
+
+2025/12/14 01:33:46 user &{{1 2025-12-13 14:09:58.602382 +0000 UTC 2025-12-13 14:09:58.602382 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} admin aa1@com $2a$10$fte4V6p/GoNzGqi7qHxL2efWH0NOZlnevUztIU5jCfUQUmETlOhKO [{{2 2025-12-13 14:09:58.489877 +0000 UTC 2025-12-13 14:09:58.489877 +0000 UTC {0001-01-01 00:00:00 +0000 UTC false}} ROLE_ADMIN}]}
+
+2025/12/14 01:33:46 req.Username admin
+
+
