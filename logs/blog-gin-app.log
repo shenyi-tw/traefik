@@ -1,0 +1,155 @@
+Database setup and migration complete.
+--- Initializing Development Data ---
+Data initialization complete. Total Posts: 0
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/blog/posts           --> blog-gin-app/handler.(*PostHandler).GetPosts-fm (4 handlers)
+[GIN-debug] GET    /api/blog/posts/:id       --> blog-gin-app/handler.(*PostHandler).GetPost-fm (4 handlers)
+[GIN-debug] POST   /api/blog/posts           --> blog-gin-app/handler.(*PostHandler).CreatePost-fm (4 handlers)
+[GIN-debug] DELETE /api/blog/posts/:id       --> blog-gin-app/handler.(*PostHandler).DeletePost-fm (4 handlers)
+[GIN-debug] GET    /api/blog/comments        --> blog-gin-app/handler.(*CommentHandler).GetAllComments-fm (4 handlers)
+[GIN-debug] GET    /api/blog/comments/:id    --> blog-gin-app/handler.(*CommentHandler).GetCommentByID-fm (4 handlers)
+[GIN-debug] POST   /api/blog/comments/:postId/comments --> blog-gin-app/handler.(*CommentHandler).AddCommentToPost-fm (4 handlers)
+[GIN-debug] DELETE /api/blog/comments/:id    --> blog-gin-app/handler.(*CommentHandler).DeleteComment-fm (4 handlers)
+Gin server running on http://localhost:8080
+--- Request Headers for: GET /api/blog/posts ---
+X-Real-Ip: 192.168.65.1
+X-User-Name: admin
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+X-Forwarded-Host: 192.168.0.102:8081
+X-User-Id: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+Accept: application/json, text/plain, */*
+X-Forwarded-Server: dfd223cf5852
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+X-Forwarded-Port: 8081
+Referer: http://localhost:5173/
+X-Forwarded-For: 192.168.65.1
+X-Forwarded-Proto: http
+X-User-Roles: ROLE_ADMIN
+Accept-Encoding: gzip, deflate
+Origin: http://localhost:5173
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:33:46 | 200 |    1.083812ms |    192.168.65.1 | GET      "/api/blog/posts?page=0&size=5"
+--- Request Headers for: POST /api/blog/posts ---
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+X-Forwarded-For: 192.168.65.1
+X-Forwarded-Host: 192.168.0.102:8081
+X-User-Name: admin
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+X-Forwarded-Port: 8081
+X-Forwarded-Server: dfd223cf5852
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+Origin: http://localhost:5173
+X-User-Roles: ROLE_ADMIN
+Accept: application/json, text/plain, */*
+Referer: http://localhost:5173/
+X-Forwarded-Proto: http
+X-Real-Ip: 192.168.65.1
+X-User-Id: 1
+Content-Length: 29
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:33:57 | 201 |      345.87µs |    192.168.65.1 | POST     "/api/blog/posts"
+--- Request Headers for: GET /api/blog/posts ---
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+X-Forwarded-Proto: http
+X-Real-Ip: 192.168.65.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+X-Forwarded-Server: dfd223cf5852
+X-User-Name: admin
+X-User-Roles: ROLE_ADMIN
+Accept-Encoding: gzip, deflate
+X-Forwarded-For: 192.168.65.1
+X-Forwarded-Host: 192.168.0.102:8081
+X-User-Id: 1
+Accept: application/json, text/plain, */*
+Origin: http://localhost:5173
+Referer: http://localhost:5173/
+X-Forwarded-Port: 8081
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:33:57 | 200 |     331.878µs |    192.168.65.1 | GET      "/api/blog/posts?page=0&size=5"
+--- Request Headers for: GET /api/blog/posts/8 ---
+X-Forwarded-For: 192.168.65.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+Accept: application/json, text/plain, */*
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+Referer: http://localhost:5173/
+X-Forwarded-Proto: http
+X-Real-Ip: 192.168.65.1
+X-User-Name: admin
+X-User-Roles: ROLE_ADMIN
+X-Forwarded-Server: dfd223cf5852
+X-User-Id: 1
+Accept-Encoding: gzip, deflate
+Origin: http://localhost:5173
+X-Forwarded-Host: 192.168.0.102:8081
+X-Forwarded-Port: 8081
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:33:59 | 200 |     257.354µs |    192.168.65.1 | GET      "/api/blog/posts/8"
+--- Request Headers for: POST /api/blog/comments/8/comments ---
+Referer: http://localhost:5173/
+X-User-Roles: ROLE_ADMIN
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+Origin: http://localhost:5173
+X-Forwarded-Host: 192.168.0.102:8081
+X-Forwarded-Port: 8081
+X-Forwarded-Proto: http
+X-Forwarded-Server: dfd223cf5852
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+Content-Length: 16
+Accept: application/json, text/plain, */*
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+Content-Type: application/json
+X-Forwarded-For: 192.168.65.1
+X-Real-Ip: 192.168.65.1
+X-User-Id: 1
+X-User-Name: admin
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:34:00 | 201 |     605.165µs |    192.168.65.1 | POST     "/api/blog/comments/8/comments"
+--- Request Headers for: GET /api/blog/posts/8 ---
+Accept: application/json, text/plain, */*
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+X-Forwarded-For: 192.168.65.1
+X-Forwarded-Port: 8081
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+Origin: http://localhost:5173
+X-Real-Ip: 192.168.65.1
+X-User-Roles: ROLE_ADMIN
+X-Forwarded-Host: 192.168.0.102:8081
+X-Forwarded-Proto: http
+X-Forwarded-Server: dfd223cf5852
+X-User-Id: 1
+X-User-Name: admin
+Referer: http://localhost:5173/
+Accept-Encoding: gzip, deflate
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:34:00 | 200 |      254.02µs |    192.168.65.1 | GET      "/api/blog/posts/8"
+--- Request Headers for: GET /api/blog/posts ---
+X-User-Name: admin
+Accept: application/json, text/plain, */*
+Accept-Language: en-US,en;q=0.9,zh-TW;q=0.8,zh-CN;q=0.7,zh;q=0.6,ja;q=0.5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjU3NjI0MjYsImlhdCI6MTc2NTY3NjAyNiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4ifQ.WkyQhjxcTO4TVV_t0nUlvMZu2MTou2MdkVdOjrZC4X0
+X-Forwarded-Host: 192.168.0.102:8081
+X-Forwarded-Proto: http
+X-User-Id: 1
+Accept-Encoding: gzip, deflate
+X-Forwarded-Port: 8081
+X-Real-Ip: 192.168.65.1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0
+Referer: http://localhost:5173/
+X-Forwarded-Server: dfd223cf5852
+X-User-Roles: ROLE_ADMIN
+Origin: http://localhost:5173
+X-Forwarded-For: 192.168.65.1
+-----------------------------------------------------------------
+[GIN] 2025/12/14 - 01:34:04 | 200 |     846.221µs |    192.168.65.1 | GET      "/api/blog/posts?page=0&size=5"

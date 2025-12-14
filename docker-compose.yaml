@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+
+  auth-check:
+    build: ./auth-check
+    image: auth-check:latest
+    container_name: auth-check
+    environment:
+      - JWT_SECRET=your-very-very-very-very-secret-key-123456
+    networks:
+      - security-demo-go
+      - myjhipsterapp_default
+
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --providers.docker.exposedbydefault=false
+      - --accesslog=true 
+      - --log.level=DEBUG
+    ports:
+      - "8081:80"
+      - "8082:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - security-demo-go
+      - myjhipsterapp_default
+  
+  go-jwt-auth-service:
+    build: ./go-jwt-auth-service
+    image: go-jwt-auth-service:latest
+    container_name: go-jwt-auth-service
+    networks:
+      - security-demo-go
+      - myjhipsterapp_default
+    environment:
+      - JWT_SECRET=your-very-very-very-very-secret-key-123456
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_USER=myJhipsterApp
+      - DB_PASSWORD=
+      - DB_NAME=demodb
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.auth-lb.loadbalancer.server.port=8080"
+      - "traefik.http.routers.go-auth-options.rule=Method(`OPTIONS`)"
+      - "traefik.http.routers.go-auth-options.priority=101"
+      - "traefik.http.routers.go-auth-options.service=auth-lb"
+      - "traefik.http.routers.go-auth-options.middlewares=cors-for-other-apis"
+      - "traefik.http.routers.go-auth-options.entrypoints=web"
+      - "traefik.http.middlewares.cors-for-login.headers.accessControlAllowOriginList=http://localhost:5173"
+      - "traefik.http.middlewares.cors-for-login.headers.accessControlAllowMethods=POST,OPTIONS"
+      - "traefik.http.middlewares.cors-for-login.headers.accessControlAllowHeaders=Authorization,Content-Type"
+      - "traefik.http.middlewares.cors-for-login.headers.accessControlAllowCredentials=true"
+      - "traefik.http.routers.go-auth-public.rule=PathPrefix(`/api/auth`)"
+      - "traefik.http.routers.go-auth-public.priority=100"
+      - "traefik.http.routers.go-auth-public.service=auth-lb"
+      - "traefik.http.routers.go-auth-public.middlewares=cors-for-login"
+      - "traefik.http.routers.go-auth-public.entrypoints=web"
+      - "traefik.http.routers.go-auth-protected.rule=PathPrefix(`/api/s2`) || PathPrefix(`/api/user`)"
+      - "traefik.http.routers.go-auth-protected.priority=99"
+      - "traefik.http.routers.go-auth-protected.service=auth-lb"
+      - "traefik.http.routers.go-auth-protected.entrypoints=web"
+      - "traefik.http.routers.go-auth-protected.middlewares=auth-forwarder,cors-for-other-apis"
+      - "traefik.http.middlewares.cors-for-other-apis.headers.accessControlAllowOriginList=http://localhost:5173"
+      - "traefik.http.middlewares.cors-for-other-apis.headers.accessControlAllowMethods=GET,POST,PUT,DELETE,OPTIONS"
+      - "traefik.http.middlewares.cors-for-other-apis.headers.accessControlAllowHeaders=Authorization,Content-Type"
+      - "traefik.http.middlewares.cors-for-other-apis.headers.accessControlAllowCredentials=true"
+      - "traefik.http.middlewares.auth-forwarder.forwardauth.address=http://auth-check:8080/auth/check"
+      - "traefik.http.middlewares.auth-forwarder.forwardauth.authResponseHeaders=X-User-Id,X-User-Name,X-User-Roles"
+
+
+  blog-gin-app:
+    build: ./blog-gin-app
+    image: blog-gin-app:latest
+    container_name: blog-gin-app
+    networks:
+      - security-demo-go
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.blog-app-lb.loadbalancer.server.port=8080"
+      - "traefik.http.routers.blog-app.rule=PathPrefix(`/api/blog`)"
+      - "traefik.http.routers.blog-app.priority=100"
+      - "traefik.http.routers.blog-app.entrypoints=web"
+      - "traefik.http.routers.blog-app.service=blog-app-lb"
+      - "traefik.http.routers.blog-app.middlewares=auth-forwarder,cors-for-other-apis"
+
+networks:
+  security-demo-go:
+    external: false
+
+  myjhipsterapp_default:
+    external: true
